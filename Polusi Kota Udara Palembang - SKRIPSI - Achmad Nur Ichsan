@@ -132,16 +132,11 @@ def train_model_for_ispu_total(data, look_back, epochs, batch_size, learning_rat
     trainY = invert_predictions(trainY, scaler)
     testY = invert_predictions(testY, scaler)
 
-    train_rmse = np.sqrt(mean_squared_error(trainY, trainPredict))
-    train_mae = mean_absolute_error(trainY, trainPredict)
-    train_mape = mean_absolute_percentage_error(trainY, trainPredict)
-
     test_rmse = np.sqrt(mean_squared_error(testY, testPredict))
     test_mae = mean_absolute_error(testY, testPredict)
     test_mape = mean_absolute_percentage_error(testY, testPredict)
 
-    st.write(f"Train RMSE: {train_rmse:.2f}, MAE: {train_mae:.2f}, MAPE: {train_mape:.2f}%")
-    st.write(f"Test RMSE: {test_rmse:.2f}, MAE: {test_mae:.2f}, MAPE: {test_mape:.2f}%")
+    st.write(f"RMSE: {test_rmse:.2f}, MAE: {test_mae:.2f}, MAPE: {test_mape:.2f}%")
 
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.plot(testY, label='Actual ISPU Total (Test)', color='blue')
@@ -209,4 +204,4 @@ end_date = st.sidebar.date_input("End Date", value=pd.to_datetime("2024-04-30"),
 uploaded_file = st.sidebar.file_uploader("Upload Excel File", type=["xlsx"])
 
 if st.sidebar.button("Run LSTM Prediction"):
-    run_lstm(uploaded_file, start_date, end_date)
+    run_lstm(uploaded_file, start_date, end_date)
